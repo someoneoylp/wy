@@ -1,16 +1,16 @@
 <template>
   <div id="app">
       <header class="header">
-          <p class="title">编辑系统</p>
+          <p class="title">有道背单词数据编辑系统</p>
       </header>
       <ul @click="goto" v-if="selectedCom === 'nav'" class="nav">
-        <li class="menu-item modifybook" data-target="modifybook">修改图书</li>
-        <li class="menu-item modifyword" data-target="modifyword">修改单词</li>
+        <li class="menu-item modifybook" data-target="modifybook">编辑图书</li>
+        <li class="menu-item modifyword" data-target="modifyword">编辑单词</li>
         <li class="menu-item setparam" data-target="setparam">参数配置</li>
       </ul>
       <div class="content" v-show="selectedCom !== 'nav'">
         <!-- 根据 show来判断要显示哪一个组件 -->
-        <div class="bread_crumbs"> <span class="home" @click="goto" data-target="nav"><i class="fa fa-home" aria-hidden="true"></i>首页</span> / ~~</div>
+        <div class="bread_crumbs"> <span class="home" @click="goto" data-target="nav"><i class="fa fa-home" aria-hidden="true"></i>首页</span> / {{breadcrumb_item}} </div>
         <v-modifyBook v-if="selectedCom === 'modifybook'"></v-modifyBook>
         <v-modifyWord v-if="selectedCom === 'modifyword'"></v-modifyWord>
         <v-setParam   v-if="selectedCom === 'setparam'"></v-setParam>
@@ -27,13 +27,14 @@ export default {
   name: 'app',
   data () {
     return {
-      selectedCom: 'modifybook' // 判断当前应该显示的组建，初始化的时候显示导航
+      selectedCom: 'nav', // 判断当前应该显示的组建，初始化的时候显示导航
+      breadcrumb_item: ''
     }
   },
   components: {
     'v-modifyBook': modifyBook,
     'v-modifyWord' : modifyWord,
-    'v-serParam':serParam
+    'v-setParam': serParam
   },
   mounted(){
    
@@ -45,7 +46,8 @@ export default {
       e.preventDefault()
       this.selectedCom = e.target.getAttribute('data-target') === null ? 'nav' : e.target.getAttribute('data-target') // 设置当前显示的组件
       // 还要显示back按钮
-      console.log()
+      this.breadcrumb_item = e.target.innerText
+      console.log(e.target.innerText)
     }
   }
 }
@@ -61,6 +63,7 @@ body{
     background: linear-gradient(to right, #636FA4, #E8CBC0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 #app{
+  position: relative;
   .header{
       width: 100%;
       height: 50px;
@@ -111,21 +114,21 @@ body{
     margin: 30px auto;
     border-radius: 5px;
     padding: 10px 20px;
-    // background: rgba(0, 0, 0, 0.22);
+    min-height: 400px;
     background: rgba(250, 250, 250, 0.9);
     color: rgba(0,0,0,.85);
     .bread_crumbs{
+      font-size: 14px;
       .home{
         height: 40px;
         border-radius: 40px;
         display: inline-block;
         background-size: 100% 100%; 
         font-style: normal;
-        font-size: 14px;
         cursor: pointer;
       }
     }
   }
 }
-
+ @import './css/main.scss';
 </style>

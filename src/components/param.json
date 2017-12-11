@@ -1,0 +1,24 @@
+{
+    "defaultCovers": [
+        {
+            "coverUrl": "http://ydschool-online.nos.netease.com/1510040788801defulatCover1.jpg",
+            "order": 1
+        },
+        {
+            "coverUrl": "http://ydschool-online.nos.netease.com/1510040948666defulatCover2.jpg",
+            "order": 2
+        },
+        {
+            "coverUrl": "http://ydschool-online.nos.netease.com/1510040970440defulatCover3.jpg",
+            "order": 3
+        },
+        {
+            "coverUrl": "http://ydschool-online.nos.netease.com/1510040988279defulatCover4.jpg",
+            "order": 4
+        },
+        {
+            "coverUrl": "http://ydschool-online.nos.netease.com/1510041003986defulatCover5.jpg",
+            "order": 5
+        }
+    ]
+}

@@ -6,33 +6,39 @@
 
 <script>
 import JSONEditor from 'Jsoneditor'
+import { setUpdate } from './dataModal.js';
 export default {
   name: 'editor',
   data () {
     return {
-      
+      container: '',
+      editor: ''
+    }
+  },
+  props:{
+    jsonData:{
+      type: Object,
+      default: ()=>{
+        return {}
+      }
     }
   },
   mounted(){
     this.init()
+    this.$on('updata', function(data){
+      // 要注意每次查询的地址可能不同
+      setUpdate(this.editor.get()).then(res =>{
+      })
+    })
   },
-  computed:{
-   },
+  computed: {
+  },
   methods:{
     init:function(){
-        const container = document.getElementById('jsoneditor');
-        let options = {};
-        var editor = new JSONEditor(container, options);
-         var json = {
-            "Array": [1, 2, 3],
-            "Boolean": true,
-            "Null": null,
-            "Number": 123,
-            "Object": {"a": "b", "c": "d"},
-            "String": "Hello World"
-        };
-        editor.set(json);
-    }
+      this.container = document.getElementById('jsoneditor')
+      this.editor = new JSONEditor(this.container, {});
+      this.editor.set(this.jsonData)
+    },
   }
 }
 </script>
